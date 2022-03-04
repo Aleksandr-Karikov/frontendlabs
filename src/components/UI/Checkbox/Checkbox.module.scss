@@ -1,0 +1,26 @@
+.check {
+    max-width: 90%;
+    padding-left: 2em;
+    text-align: left;
+    display: flex;
+    word-wrap: break-word;
+    position: relative;
+    align-items: center;
+    .check__input {
+        position: absolute;
+        margin-left: -2em;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+    .content {
+        width: 100%;
+        font-size: 20px;
+    }
+    .check__box {
+        margin-left: -2em;
+        margin-top: 5px;
+        position: absolute;
+        width: 15px;
+        height: 15px;
+    }
+}

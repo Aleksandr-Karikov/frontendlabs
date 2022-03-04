@@ -1,0 +1,75 @@
+.todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(255, 252, 252);
+    word-wrap: break-word;
+    position: relative;
+    padding-right: 2em;
+    .time {
+        position: absolute;
+        text-decoration: none;
+        font-size: 12px;
+        right: 6em;
+    }
+    .todo__btn {
+        margin-left: 10px;
+        height: 15px;
+        width: 15px;
+        cursor: pointer;
+    }
+    .todo__content {
+        padding: 15px;
+        padding-left: 6em;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        width: 95%;
+        font-size: 20px;
+        padding-left: 2em;
+        .todo__checkbox {
+            width: 15px;
+            height: 15px;
+            margin-right: 2em;
+        }
+        .todo__text {
+            width: 100%;
+            font-size: 20px;
+            width: 90%;
+        }
+    }
+    &--enter {
+        animation: swing-in-top-fwd 2s cubic-bezier(0.175, 0.885, 0.320, 1.275) calc(0.15s * var(--delay)) both;
+    }
+}
+
+@keyframes swing-in-top-fwd {
+    0% {
+        transform: rotateX(-100deg);
+        transform: rotateX(-100deg);
+        transform-origin: top;
+        transform-origin: top;
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        transform-origin: top;
+        transform-origin: top;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out-fwd {
+    0% {
+        transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateZ(80px);
+        transform: translateZ(80px);
+        opacity: 0;
+    }
+}

@@ -1,0 +1,97 @@
+.App {
+    width: 70%;
+    padding: 7px;
+    text-align: center;
+    margin-top: 100px;
+    min-width: 80%;
+    .head {
+        background: rgb(47, 79, 79);
+        color: white;
+        padding: 10px;
+        margin: auto;
+        .add {
+            padding: 10px;
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .add__content {
+                background: #fff;
+                overflow: hidden;
+                padding: 5px;
+                max-width: 80%;
+                width: 80%;
+                height: 50px;
+                min-width: 200px;
+                min-height: 30px;
+                border-radius: 5px;
+                font-size: 22px;
+                margin-left: 15px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                border: none;
+            }
+            .add__button {
+                margin-right: 50px;
+            }
+            button {
+                padding: 4px 10px;
+                height: 50px;
+                margin: 0 5%;
+                background: rgb(62, 138, 79);
+                font-size: 20px;
+                color: rgb(255, 253, 253);
+                border-radius: 5px;
+                cursor: pointer;
+                border: none;
+            }
+        }
+    }
+    .App__filter {
+        display: flex;
+        div {
+            margin: 5px;
+            color: rgb(113, 140, 169)
+        }
+    }
+    .App__marked {
+        font-weight: bold;
+    }
+    .App__unMarked {
+        font-weight: normal;
+    }
+    .App__empty {
+        padding-top: 200px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 50px;
+        height: 500px;
+        border: 1px solid #000;
+        animation: swing-in-top-fwd 1s linear 0s both;
+    }
+}
+
+h1 {}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@keyframes swing-in-top-fwd {
+    0% {
+        transform: rotateX(-100deg);
+        //transform: rotateX(-100deg);
+        transform-origin: top;
+        transform-origin: top;
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0deg);
+        //transform: rotateX(0deg);
+        transform-origin: top;
+        transform-origin: top;
+        opacity: 1;
+    }
+}
