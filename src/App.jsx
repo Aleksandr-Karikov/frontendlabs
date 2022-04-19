@@ -1,27 +1,33 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import TodoSerice from './api/TodoService';
 import styles from './App.module.scss';
 import Todolist from './components/TodoList/Todolist';
 
 function App() {
   const filters = { ALL: 'all', DONE: 'done', NOTDONE: 'notdone' };
-  const [moks, setMoks] = useState([
-    { id: 1, text: "test1", checked: false, time: "" },
-    { id: 2, text: "test2", checked: false, time: "" },
-    { id: 3, text: "test3", checked: false, time: "" }
-  ])
+  const [moks, setMoks] = useState([])
   const [filter, setFilter] = useState(filters.ALL);
   const [textArea, setTextArea] = useState("");
-
-
+  const [isTodosLoadings, setIsTodoLoading] = useState(false);
+  async function fetchTodos() {
+    setIsTodoLoading(true);
+    const todos = await TodoSerice.getAll();
+    setIsTodoLoading(false);
+    setMoks(todos);
+  }
+  useEffect(() => {
+    fetchTodos();
+  }, []);
   const addTodo = () => {
     if (textArea) {
       for (let mok of moks) {
-        if (mok.text === textArea) {
+        if (mok.title === textArea) {
           alert("Такое дело уже есть");
           return;
         }
       }
-      setMoks([...moks, { id: Date.now(), text: textArea, checked: false }])
+      setMoks([{ id: Date.now(), title: textArea, completed: false }, ...moks])
       setTextArea("");
     }
     else alert("Поле ввода пустое")
@@ -35,18 +41,17 @@ function App() {
       case filters.ALL:
         return moks;
       case filters.DONE:
-        return moks.filter((value) => value.checked)
+        return moks.filter((value) => value.completed)
       case filters.NOTDONE:
-        return moks.filter((value) => !value.checked)
+        return moks.filter((value) => !value.completed)
     }
   }
 
   const updateTodo = (todo) => {
-    console.log(todo);
     const updateMoks = moks;
     for (let mok of updateMoks) {
       if (mok.id === todo.id) {
-        mok.checked = todo.checked;
+        mok.completed = todo.completed;
         mok.time = todo.time;
       }
     }
@@ -63,12 +68,12 @@ function App() {
             <button onClick={addTodo} >Добавить</button>
           </div>
         </div>
-      </div>{
-        getFiltered(filter).length ?
-          <Todolist todos={getFiltered(filter)} remove={removeTodo} setTodo={updateTodo}  /> :
-          <div className={styles.App__empty}>Список пуст</div>
-
+      </div>
+      {
+        isTodosLoadings ? <div style={{ height: '70vh' }}>Идет загрузка...</div> : <Todolist todos={getFiltered(filter)} remove={removeTodo} setTodo={updateTodo} />
       }
+
+
 
       <div className={styles.App__filter}>
         <div onClick={() => {
@@ -79,7 +84,7 @@ function App() {
         }} className={filter === filters.NOTDONE ? styles.App__marked : styles.App__unMarked}>Не сделано({getFiltered(filters.NOTDONE).length})</div>
         <div onClick={() => {
           setFilter(filters.ALL)
-          
+
         }} className={filter === filters.ALL ? styles.App__marked : styles.App__unMarked}>Все({getFiltered(filters.ALL).length})</div>
       </div>
     </div>
